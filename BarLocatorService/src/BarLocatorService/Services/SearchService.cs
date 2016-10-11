@@ -1,15 +1,16 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using BarLocatorService.Domain;
+using BarLocatorService.Services.Abstract;
 
 namespace BarLocatorService.Services
 {
-    public class SearchService
+    public class SearchService : ISearchService
     {
-        private readonly QueryBuilder _queryBuilder;
+        private readonly IQueryBuilder _queryBuilder;
         private readonly HttpClient _httpClient;
 
-        public SearchService(QueryBuilder queryBuilder)
+        public SearchService(IQueryBuilder queryBuilder)
         {
             _queryBuilder = queryBuilder;
             _httpClient = new HttpClient();

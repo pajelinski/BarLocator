@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BarLocatorService.Domain;
 using BarLocatorService.Services;
+using BarLocatorService.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarLocatorService.Controllers
@@ -9,11 +10,11 @@ namespace BarLocatorService.Controllers
     public class BarLocationController : Controller
     {
         private const string BarType = "bar";
-        private readonly SearchService _searchService;
+        private readonly ISearchService _searchService;
 
-        public BarLocationController()
+        public BarLocationController(ISearchService searchService)
         {
-            _searchService = new SearchService(new QueryBuilder("AIzaSyBRlldhAClDuieSD7DBdiqky4N-lkhmb6A"));
+            _searchService = searchService;
         }
 
         [HttpGet("bars/nearby")]

@@ -1,9 +1,10 @@
 using System;
 using BarLocatorService.Domain;
+using BarLocatorService.Services.Abstract;
 
 namespace BarLocatorService.Services
 {
-    public class QueryBuilder
+    public class QueryBuilder : IQueryBuilder
     {
         private const string GoolePlacesApiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
         private readonly string _apiKey;

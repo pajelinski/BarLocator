@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using BarLocatorService.Services;
+using BarLocatorService.Services.Abstract;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +25,8 @@ namespace BarLocatorService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IQueryBuilder, QueryBuilder>(_ => new QueryBuilder(Configuration["ApiKey"]));
+            services.AddTransient<ISearchService, SearchService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
