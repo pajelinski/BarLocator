@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using BarLocatorService.Domain;
 
@@ -8,7 +7,7 @@ namespace BarLocatorService.Services
     public class SearchService
     {
         private readonly QueryBuilder _queryBuilder;
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         public SearchService(QueryBuilder queryBuilder)
         {
