@@ -5,15 +5,39 @@
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyBUVzdLCvCVhgCnU7YO2mb1bHA_N9r0ugc&sensor=true" type="text/javascript"></script>
 
 <div id="map_canvas" style="height: 550px;"></div>
+<br/>
+<input type="button" value="Find bars around Main Square in Krakow" onclick="MarkNearbyBars()" />
 
 @section scripts {
     <section class="scripts">
-        <script type="text/javascript">   
+        <script type="text/javascript">
             $(document).ready(function () {
-                Initialize();
+                initialize();
             });
 
-            function Initialize() {
+            var map;
+
+            function MarkNearbyBars() {
+                $.ajax({
+                    url: '@Url.Action("GetNearbyBarLocations", "Home")',
+                    type: 'GET',
+                    dataType: 'json',
+                    cache: false,
+                    success: SetBarMarkers
+                });
+            }
+
+            function SetBarMarkers(data) {
+                var parsedData = JSON.parse(data);
+                for (var i = 0; i < parsedData.results.length; i++) {
+                    var result = parsedData.results[i];
+                    var position = result.geometry.location;
+                    setMarker(map, position, result.name);
+                }
+                map.setCenter({ lat: 50.0618971, lng: 19.9345673 });
+            }
+
+            function initialize() {
 
                 google.maps.visualRefresh = true;
 
@@ -27,17 +51,17 @@
 
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
-                        function (position) { setPosition(map, position) },
+                        function (position) { markCurrentPosition(map, position) },
                         function () {window.handleLocationError(true, infoWindow, map.getCenter());
                     });
                 } else {
                     window.handleLocationError(false, infoWindow, map.getCenter());
                 }
 
-                var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
             }
 
-            function setPosition(map, position) {
+            function markCurrentPosition(map, position) {
                 var pos = mapLocaliztion(position);
 
                 setBlueMarker(map, pos, "Your location");
