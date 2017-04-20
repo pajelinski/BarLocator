@@ -10,6 +10,14 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\src\BarLocatorService\BarLocatorService.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -31,5 +39,8 @@
     <PackageReference Include="xunit.runner.visualstudio">
       <Version>2.3.0-beta1-build1309</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 </Project>

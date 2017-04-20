@@ -17,10 +17,10 @@ namespace BarLocatorService.Controllers
         }
 
         [HttpGet("bars/nearby")]
-        public string GetNearbyBars(float latitude, float longitude, int radius)
+        public async Task<string> GetNearbyBars(float latitude, float longitude, int radius)
         {
             var location = new Coordinates(latitude, longitude);
-            return SearchNearbyAsync(radius, location, BarType).Result;
+            return await SearchNearbyAsync(radius, location, BarType);
         }
 
         private Task<string> SearchNearbyAsync(int radius, Coordinates location, string type)
