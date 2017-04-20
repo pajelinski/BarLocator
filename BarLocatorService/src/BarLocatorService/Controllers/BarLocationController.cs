@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using BarLocatorService.Domain;
-using BarLocatorService.Services;
 using BarLocatorService.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
