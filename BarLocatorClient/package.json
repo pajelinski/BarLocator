@@ -1,0 +1,8 @@
+{
+  "name": "BarLocatorClient",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pajelinski/BarLocator.git",
+  "author": "Pawel Jelinski",
+  "license": "MIT"
+}
